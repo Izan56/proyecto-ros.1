@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proyecto ROS - Control de Brazo Robótico</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #f4f4f9;
+      }
+
+      /* Estilos del header */
+      header {
+        background-color: #283593;
+        padding: 20px;
+        text-align: center;
+        color: white;
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+      }
+
+      header h1 {
+        margin: 0;
+        font-size: 2.5em;
+      }
+
+      header p {
+        margin: 10px 0 0;
+        font-size: 1.2em;
+      }
+
+      /* Estilos del menú de navegación */
+      nav {
+        margin-top: 20px;
+        text-align: center;
+      }
+
+      nav a {
+        margin: 0 15px;
+        text-decoration: none;
+        color: white;
+        font-size: 1.1em;
+      }
+
+      nav a:hover {
+        color: #61dafb;
+      }
+
+      /* Estilo para las viñetas (secciones) */
+      .section {
+        display: none;
+        width: 100%;
+        height: 100vh;
+        text-align: center;
+        padding: 100px 20px;
+        box-sizing: border-box;
+        background-color: #f4f4f9;
+        transition: opacity 0.5s ease-in-out;
+      }
+
+      /* Añadimos margen superior para evitar que el texto se corte con el header */
+      .section {
+        margin-top: 80px; /* Añade un margen superior para evitar el recorte */
+      }
+
+      /* Sección activa visible */
+      .active {
+        display: block;
+        opacity: 1;
+      }
+
+      /* Estilos para el contenido de cada sección */
+      .section h2 {
+        font-size: 2.5em;
+        color: #283593;
+        margin-bottom: 20px;
+      }
+
+      .section img {
+        max-width: 600px;
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 20px;
+      }
+
+      .small-image {
+        width: 100px; /* Ajusta el tamaño según necesites (reducción a 100px) */
+        height: auto; /* Mantiene la proporción de la imagen */
+        margin-right: 20px; /* Margen entre la imagen y el texto */
+      }
+
+      .text-container {
+        display: flex; /* Usamos flexbox para alinear imagen y texto */
+        align-items: center; /* Alinea verticalmente la imagen y el texto */
+        justify-content: center; /* Centra el contenido */
+      }
+
+      .section p {
+        font-size: 1.2em;
+        line-height: 1.6em;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      /* Estilo del cuadro para la descarga */
+      .download-box {
+        margin-top: 30px;
+        padding: 20px;
+        background-color: #e3f2fd;
+        border: 1px solid #2196f3;
+        border-radius: 10px;
+        display: inline-block; /* Permite que el cuadro se ajuste al contenido */
+      }
+
+      .download-box a {
+        text-decoration: none;
+        color: #2196f3;
+        font-size: 1.2em;
+        font-weight: bold;
+      }
+
+      /* Footer */
+      footer {
+        background-color: #283593;
+        padding: 20px;
+        color: white;
+        text-align: center;
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+      }
+
+      footer p {
+        margin: 0;
+      }
+
+      /* Estilo responsivo */
+      @media (max-width: 768px) {
+        .section img {
+          max-width: 100%;
+        }
+        .text-container {
+          flex-direction: column; /* Cambia a columna en pantallas pequeñas */
+          align-items: center; /* Centra el contenido */
+        }
+        .small-image {
+          margin-right: 0; /* Sin margen derecho en pantallas pequeñas */
+          margin-bottom: 20px; /* Añade margen inferior en pantallas pequeñas */
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header>
+      <h1>Proyecto ROS</h1>
+      <p>Control remoto del brazo robótico Yaskawa</p>
+      <nav>
+        <a href="#" onclick="showSection('inicio')">Inicio</a>
+        <a href="#" onclick="showSection('ros')">¿Qué es ROS?</a>
+        <a href="#" onclick="showSection('aplicacion')"
+          >Aplicación del Brazo Robótico</a
+        >
+      </nav>
+    </header>
+
+    <!-- Sección de inicio (Inicio) -->
+    <section class="section active" id="inicio">
+      <h2>Bienvenido al Proyecto ROS</h2>
+      <img
+        src="https://upload.wikimedia.org/wikipedia/commons/b/bb/Ros_logo.svg"
+        alt="Logo de ROS"
+      />
+      <p>
+        ROS (Robot Operating System) es un conjunto de software que proporciona
+        las bibliotecas y herramientas necesarias para desarrollar aplicaciones
+        de robótica. Permite la comunicación entre diferentes componentes y
+        sistemas de manera distribuida y modular, facilitando el desarrollo,
+        control y simulación de robots. ROS soporta múltiples plataformas de
+        hardware y se usa en aplicaciones como control de movimiento, visión
+        computacional y más.
+      </p>
+    </section>
+
+    <!-- Sección ¿Qué es ROS? -->
+    <section class="section" id="ros">
+      <h2>¿Qué es ROS?</h2>
+      <div class="text-container">
+        <img
+          class="small-image"
+          src="compatible-robots-ros.jpg"
+          alt="Robot usando ROS"
+        />
+        <p>
+          ROS (Robot Operating System) permite que los desarrolladores de
+          robótica creen soluciones modulares. Su arquitectura distribuida
+          permite la interoperabilidad de diferentes componentes de hardware y
+          software, facilitando el desarrollo de sistemas robóticos complejos.
+          Desde la manipulación de robots industriales hasta la navegación de
+          robots autónomos, ROS se ha convertido en un estándar en el campo de
+          la robótica.
+        </p>
+      </div>
+    </section>
+
+    <!-- Sección de la aplicación -->
+    <section class="section" id="aplicacion">
+      <h2>Control Remoto del Brazo Robótico Yaskawa</h2>
+      <div class="text-container">
+        <img
+          class="small-image"
+          src="Yaskawa-robot-uGX9QVW8e-transformed.jpeg"
+          alt="Brazo robótico Yaskawa"
+        />
+        <p>
+          Nuestra aplicación permite el control remoto de un brazo robótico de
+          la marca **Yaskawa**, utilizando la plataforma ROS para comunicar y
+          enviar comandos al robot de manera eficiente. El brazo robótico
+          Yaskawa es conocido por su precisión y rendimiento en tareas
+          industriales, y a través de esta aplicación, será posible controlarlo
+          desde una interfaz sencilla, habilitando su uso en diversas
+          aplicaciones como soldadura, ensamblaje y más.
+        </p>
+      </div>
+
+      <!-- Cuadro para la descarga -->
+      <div class="download-box">
+        <p>Descarga la aplicación para el control remoto del brazo robótico:</p>
+        <a href="enlace-a-la-aplicacion.zip">Descargar Aquí</a>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2024 Proyecto ROS - Control de Brazo Robótico Yaskawa</p>
+    </footer>
+
+    <!-- JavaScript para controlar el cambio de viñetas -->
+    <script>
+      // Función para mostrar la sección seleccionada
+      function showSection(sectionId) {
+        // Ocultar todas las secciones
+        var sections = document.querySelectorAll(".section");
+        sections.forEach(function (section) {
+          section.classList.remove("active");
+        });
+
+        // Mostrar la sección seleccionada
+        var selectedSection = document.getElementById(sectionId);
+        selectedSection.classList.add("active");
+      }
+    </script>
+  </body>
+</html>
